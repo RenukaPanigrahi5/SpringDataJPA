@@ -22,9 +22,12 @@ public class CompanyController {
 	private CompanyService companyService;
 
 	@PostMapping("/createCompany")
-	public ResponseEntity<Company>  createNewCompany(@RequestBody Company company) {
+	public ResponseEntity<?>  createNewCompany(@RequestBody Company company) {
 		Company comp = companyService.createNewCompany(company);
-		return new ResponseEntity<>(comp, HttpStatus.CREATED);
+		if(comp!=null){
+			return new ResponseEntity<>(comp, HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>("Not able to create Company", HttpStatus.NOT_FOUND);	
 	}
 	
 	@GetMapping("/getAllCompanies")
