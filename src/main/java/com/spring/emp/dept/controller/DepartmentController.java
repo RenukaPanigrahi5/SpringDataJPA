@@ -22,12 +22,11 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService deptService;
 
-	@PostMapping("/createEmployeeByDept/{deptName}")
+	@PostMapping("/createEmployeeByDept/{deptName}/{company_name}")
 	public ResponseEntity<Department> saveEmployeeDept(@RequestBody List<Employee> employeeList,
-			@PathVariable String deptName) {
-		Department dept = deptService.saveEmpsByDeptName(employeeList, deptName);
+			@PathVariable String deptName, @PathVariable String company_name) {
+		Department dept = deptService.saveEmpsByDeptNameAndCompany(employeeList, deptName, company_name);
 		return new ResponseEntity<>(dept, HttpStatus.OK);
-		// return null;
 	}
 
 	@GetMapping("/getEmpsByDeptId")

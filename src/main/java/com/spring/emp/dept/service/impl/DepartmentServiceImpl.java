@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.emp.dept.model.Company;
 import com.spring.emp.dept.model.Department;
 import com.spring.emp.dept.model.Employee;
 import com.spring.emp.dept.repository.DepartmentRepository;
@@ -17,16 +18,18 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private DepartmentRepository departmentRepository;
 
 	@Override
-	public Department saveEmpsByDeptName(List<Employee> employeeList, String deptName) {
-
+	public Department saveEmpsByDeptNameAndCompany(List<Employee> employeeList, String deptName, String companyName) {
+		Company c = new Company(companyName);
+		
 		Department d = new Department(deptName);
+		d.setCompany(c);
 		for (Employee employee : employeeList) {
 			employee.setDepartment(d);
 		}
 		d.setEmployees(employeeList);
 		return departmentRepository.save(d);
 	}
-
+	
 	@Override
 	public List<Employee> getEmpsByDeptId(Long deptId) {
 		Department dept = departmentRepository.findById(deptId).orElse(null);
@@ -44,5 +47,4 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 		return null;
 	}
-
 }

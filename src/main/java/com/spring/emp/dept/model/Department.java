@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,7 +24,10 @@ public class Department {
 
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Employee> employees = new ArrayList<>();
-
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Company company;
+	
 	public Long getId() {
 		return id;
 	}
@@ -43,6 +48,12 @@ public class Department {
 		return employees;
 	}
 
+	public Department(String name, Company company) {
+		super();
+		this.name = name;
+		this.company = company;
+	}
+
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
@@ -56,4 +67,11 @@ public class Department {
 		this.name = name;
 	}
 
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 }
