@@ -30,63 +30,57 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ComparatorControllerTest {
 
-    @ClassRule
-    public static final SpringClassRule springClassRule = new SpringClassRule();
+	@ClassRule
+	public static final SpringClassRule springClassRule = new SpringClassRule();
 
-    @Rule
-    public final SpringMethodRule springMethodRule = new SpringMethodRule();
-    
-    @Rule
-    public TestWatcher watchman = TestWatchman.watchman;
-    
-    @Autowired
-    private MockMvc mockMvc;
+	@Rule
+	public final SpringMethodRule springMethodRule = new SpringMethodRule();
 
-    @BeforeClass
-    public static void setUpClass() {
-        TestWatchman.watchman.registerClass(ComparatorControllerTest.class);
-    }
+	@Rule
+	public TestWatcher watchman = TestWatchman.watchman;
 
-    @AfterClass
-    public static void tearDownClass() {
-        TestWatchman.watchman.createReport(ComparatorControllerTest.class);
-    }
+	@Autowired
+	private MockMvc mockMvc;
 
-    /**
-     *
-     * @throws Exception
-     *
-     * It tests creating trade
-     */
-    @Test
-    @Order(1)
-    public void createCompany() throws Exception {
-        /**
-         *
-         * Create trade with id 1
-         *
-         * The request body is:
-         * {
-         *     "id": 1,
-         *     "type": "buy",
-         *     "user": {
-         *         "id": 2,
-         *         "name": "Amy Palmer"
-         *     },
-         *     "symbol": "AA",
-         *     "shares": 11,
-         *     "price": 174.82,
-         *     "timestamp": "2018-12-28 13:18:48"
-         * }
-         */
-        //String json = "{\"id\": 1, \"type\": \"buy\", \"user\": {\"id\": 2, \"name\": \"Amy Palmer\"}, \"symbol\": \"AA\", \"shares\": 11, \"price\": 174.82, \"timestamp\": \"2018-12-28 13:18:48\"}";
-    	String json = ObjectToJSONConverter.getJSONFormatForCompany();
-        mockMvc.perform(
-                post("/createCompany")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(json)
-        ).andExpect(status().isCreated());
+	@BeforeClass
+	public static void setUpClass() {
+		TestWatchman.watchman.registerClass(ComparatorControllerTest.class);
+	}
 
-      
-    }
+	@AfterClass
+	public static void tearDownClass() {
+		TestWatchman.watchman.createReport(ComparatorControllerTest.class);
+	}
+
+	/**
+	 *
+	 * @throws Exception
+	 *
+	 *             It tests creating trade
+	 */
+	@Test
+	@Order(1)
+	public void createCompany() throws Exception {
+
+		String json = ObjectToJSONConverter.getJSONFormatForCompany();
+		mockMvc.perform(post("/createCompany").contentType(MediaType.APPLICATION_JSON_UTF8).content(json))
+				.andExpect(status().isCreated());
+
+	}
+
+	@Test
+	@Order(2)
+	public void getDepNamesByCompName() throws Exception {
+
+		mockMvc.perform(get("/getDepNamesByCompName/?compName=SocGen").contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	@Order(3)
+	public void getDepNamesByCompNameNotFound() throws Exception {
+
+		mockMvc.perform(get("/getDepNamesByCompName/?compName=SocGen1").contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isNotFound());
+	}
 }
