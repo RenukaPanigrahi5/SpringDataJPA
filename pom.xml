@@ -8,7 +8,7 @@
 		<version>2.3.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>socgen.com</groupId>
+	<groupId>company.com</groupId>
 	<artifactId>SpringBootJpaOneToMany</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringBootJpaOneToMany</name>
