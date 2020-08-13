@@ -83,4 +83,12 @@ public class ComparatorControllerTest {
 		mockMvc.perform(get("/getDepNamesByCompName/?compName=amazon1").contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(status().isNotFound());
 	}
+	
+	@Test
+	@Order(4)
+	public void getCompNameNotFound() throws Exception {
+		String json = ObjectToJSONConverter.getJSONFormatForCompany();
+		mockMvc.perform(post("/createCompany1").contentType(MediaType.APPLICATION_JSON_UTF8).content(json))
+				.andExpect(status().isNotFound());
+	}
 }

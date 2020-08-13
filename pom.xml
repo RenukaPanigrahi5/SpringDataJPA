@@ -8,7 +8,11 @@
 		<version>2.3.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+<<<<<<< HEAD
 	<groupId>somecompany.com</groupId>
+=======
+	<groupId>company.com</groupId>
+>>>>>>> 8929ec141412f2fde1d304f687a44d35eccf7cd7
 	<artifactId>SpringBootJpaOneToMany</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringBootJpaOneToMany</name>
