@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Company")
 public class Company {
@@ -24,6 +26,7 @@ public class Company {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Company_Id")
+	//@JsonManagedReference
 	private List<Department> dep = new ArrayList<>();
 	
 	private String name;

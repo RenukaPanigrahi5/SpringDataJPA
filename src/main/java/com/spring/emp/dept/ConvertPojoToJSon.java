@@ -12,7 +12,7 @@ import com.spring.emp.dept.model.Employee;
 public class ConvertPojoToJSon {
 
 	public static void main(String[] args) {
-		Company c = new Company("SocGen");
+		Company c = new Company("amazon");
 		List<Department> depList = new ArrayList<>();
 		
 		Department d =new Department("tys");
@@ -29,7 +29,7 @@ public class ConvertPojoToJSon {
 		ObjectMapper mapper = new ObjectMapper();
 	     String jsonString;
 		try {
-			jsonString = mapper.writeValueAsString(c);
+			jsonString = mapper.writeValueAsString(d);
 			System.out.println(jsonString);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();

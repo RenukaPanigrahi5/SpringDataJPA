@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Department")
 public class Department {
@@ -26,6 +28,7 @@ public class Department {
 	private List<Employee> employees = new ArrayList<>();
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonBackReference
 	private Company company;
 	
 	public Long getId() {

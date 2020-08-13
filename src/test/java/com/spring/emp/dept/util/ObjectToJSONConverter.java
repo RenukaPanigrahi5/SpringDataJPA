@@ -12,7 +12,7 @@ import com.spring.emp.dept.model.Employee;
 public class ObjectToJSONConverter {
 	
 	public static String getJSONFormatForCompany() {
-		Company c = new Company("SocGen");
+		Company c = new Company("amazon");
 		List<Department> depList = new ArrayList<>();
 		
 		Department d =new Department("tys");

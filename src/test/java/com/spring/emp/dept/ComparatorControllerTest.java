@@ -72,7 +72,7 @@ public class ComparatorControllerTest {
 	@Order(2)
 	public void getDepNamesByCompName() throws Exception {
 
-		mockMvc.perform(get("/getDepNamesByCompName/?compName=SocGen").contentType(MediaType.APPLICATION_JSON_UTF8))
+		mockMvc.perform(get("/getDepNamesByCompName/?compName=amazon").contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(status().isOk());
 	}
 
@@ -80,7 +80,7 @@ public class ComparatorControllerTest {
 	@Order(3)
 	public void getDepNamesByCompNameNotFound() throws Exception {
 
-		mockMvc.perform(get("/getDepNamesByCompName/?compName=SocGen1").contentType(MediaType.APPLICATION_JSON_UTF8))
+		mockMvc.perform(get("/getDepNamesByCompName/?compName=amazon1").contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(status().isNotFound());
 	}
 }

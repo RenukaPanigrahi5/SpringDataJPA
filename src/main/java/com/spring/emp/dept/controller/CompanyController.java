@@ -1,6 +1,7 @@
 package com.spring.emp.dept.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.emp.dept.model.Company;
+import com.spring.emp.dept.model.EmpDeptSize;
 import com.spring.emp.dept.model.Employee;
 import com.spring.emp.dept.service.CompanyService;
 
@@ -41,5 +43,34 @@ public class CompanyController {
 		}
 		return new ResponseEntity<>("Company Not Found", HttpStatus.NOT_FOUND);
 	}
+	
+	//Company name as Parameter dept count as output
+	@GetMapping("/getDepCountByCompName")
+	public ResponseEntity<?> getDepCountByCompName(@RequestParam(name = "compName") String compName) {
+		Integer deptCount = companyService.getDCountByCompName(compName);
+		return new ResponseEntity<>("Department Count="+deptCount, HttpStatus.OK);
+	}
 
+	//Company Name, Dept count as output
+	@GetMapping("/getCompNameWithDeptCount")
+	public ResponseEntity<Map<String,Integer>>  getCompNameWithDeptCount() {
+		Map<String,Integer> compNameWithDeptCount = companyService.getCompNameDeptCount();
+		return new ResponseEntity<>(compNameWithDeptCount, HttpStatus.OK);
+	}
+	
+	//Company Name as key, dept count ,emp count as values
+	@GetMapping("/getAllCount")
+	public ResponseEntity<Map<String,Map<String,Integer>>> getCompNameDeptCountEmpCount(){
+		Map<String,Map<String,Integer>> countOfAll = companyService.getCountingAll();
+	   return new ResponseEntity<>(countOfAll, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAllCountPojo")
+	public ResponseEntity<Map<String,EmpDeptSize>> getCompNameDeptCountEmpCountPojo(){
+		Map<String,EmpDeptSize> countOfAllPojo = companyService.getCountingAllSample();
+	   return new ResponseEntity<>(countOfAllPojo, HttpStatus.OK);
+	}
+	
+
+	
 }
