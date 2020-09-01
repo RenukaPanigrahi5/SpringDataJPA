@@ -1,9 +1,7 @@
 package com.spring.emp.dept.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,10 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public List<Company> getAllCompanies() {
 		List<Company> listOfComp = companyRepository.findAll();
+		/*return listOfComp.stream().
+				forEach(company -> company.getDep().stream().collect(Collectors.toList()).
+								forEach(department -> department.getEmployees().
+										stream(Collectors.toList()));*/
 		for (Company company : listOfComp) {
 			List<Department> deptList = company.getDep();
 			for (Department department : deptList) {
@@ -39,6 +41,7 @@ public class CompanyServiceImpl implements CompanyService {
 		return listOfComp;
 	}
 
+	//Completed Java8 Method
 	@Override
 	public List<String> getDepNamesByCompName(String compName) {
 		
@@ -50,6 +53,17 @@ public class CompanyServiceImpl implements CompanyService {
 			for (Department department : depList) {
 				depNames.add(department.getName());
 			}
+		}
+		return depNames;
+	}
+
+	@Override
+	public List<String> getDepNamesByCompNameJava8(String compName) {
+		Optional<Company> c = Optional.ofNullable(companyRepository.findByName(compName));
+		List<String> depNames = null;
+		if (c.isPresent()) {
+			depNames = c.get().getDep().stream().
+					map(department -> department.getName()).collect(Collectors.toList());
 		}
 		return depNames;
 	}

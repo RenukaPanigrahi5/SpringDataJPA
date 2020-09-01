@@ -14,4 +14,5 @@ public interface CompanyService {
 	Map<String,Integer> getCompNameDeptCount();
 	Map<String,Map<String,Integer>> getCountingAll();
 	Map<String,EmpDeptSize> getCountingAllSample();
+	List<String> getDepNamesByCompNameJava8(String compName);
 }

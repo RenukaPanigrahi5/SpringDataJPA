@@ -24,12 +24,9 @@ public class CompanyController {
 	private CompanyService companyService;
 
 	@PostMapping("/createCompany")
-	public ResponseEntity<?>  createNewCompany(@RequestBody Company company) {
+	public ResponseEntity<Company>  createNewCompany(@RequestBody Company company) {
 		Company comp = companyService.createNewCompany(company);
-		if(comp!=null){
-			return new ResponseEntity<>(comp, HttpStatus.CREATED);
-		}
-		return new ResponseEntity<>("Not able to create Company", HttpStatus.NOT_FOUND);	
+		return new ResponseEntity<>(comp, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/getAllCompanies")
@@ -40,7 +37,8 @@ public class CompanyController {
 	
 	@GetMapping("/getDepNamesByCompName")
 	public ResponseEntity<?> getDepNamesByCompName(@RequestParam(name = "compName") String compName) {
-		List<String> depNamesList = companyService.getDepNamesByCompName(compName);
+		//List<String> depNamesList = companyService.getDepNamesByCompName(compName);
+		List<String> depNamesList = companyService.getDepNamesByCompNameJava8(compName);
 		if(null != depNamesList) {
 			return new ResponseEntity<>(depNamesList, HttpStatus.OK);
 		}
