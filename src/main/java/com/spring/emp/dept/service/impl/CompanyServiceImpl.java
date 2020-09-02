@@ -1,6 +1,9 @@
 package com.spring.emp.dept.service.impl;
 
+import java.security.cert.CollectionCertStoreParameters;
+import java.text.CollationElementIterator;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +31,6 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public List<Company> getAllCompanies() {
 		List<Company> listOfComp = companyRepository.findAll();
-		/*return listOfComp.stream().
-				forEach(company -> company.getDep().stream().collect(Collectors.toList()).
-								forEach(department -> department.getEmployees().
-										stream(Collectors.toList()));*/
 		for (Company company : listOfComp) {
 			List<Department> deptList = company.getDep();
 			for (Department department : deptList) {
@@ -71,12 +70,11 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public Integer getDCountByCompName(String compName) {
 		Company companyName = companyRepository.findByName(compName);
-		List<Department> dept = companyName.getDep();
-		int count =  dept.size();
+		int count = companyName.getDep().size();
 		return count;
 	}
 
-	//comp name dept count
+	//comp name with dept count
 	@Override
 	public Map<String, Integer> getCompNameDeptCount() {
 		List<Company> compList = companyRepository.findAll();
@@ -87,6 +85,12 @@ public class CompanyServiceImpl implements CompanyService {
 			hm.put(compName, deptList.size());
 		}
 		return hm;
+	}
+	@Override
+	public Map<String, Long> getCompNameDeptCountJava8() {
+		List<Company> compList = companyRepository.findAll();
+		return compList.stream().
+				collect(Collectors.toMap(c->c.getName(),company->company.getDep().stream().count()));
 	}
 
 	//compName deptCount EmpCount as value
@@ -110,8 +114,13 @@ public class CompanyServiceImpl implements CompanyService {
 		
 		return hm;
 	}
-	
-	
+	/*@Override
+	public Map<String, Map<String, Integer>> getCountingAllJava8(){
+		List<Company> compList = companyRepository.findAll();
+		compList.stream().collect(Collectors.toMap())
+
+	}*/
+
 	public Map<String,EmpDeptSize> getCountingAllSample() {
 		Map<String,EmpDeptSize> hm = new HashMap<>();
 		List<Company> compList = companyRepository.findAll();

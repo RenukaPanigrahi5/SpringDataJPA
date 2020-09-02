@@ -54,8 +54,9 @@ public class CompanyController {
 
 	//Company Name, Dept count as output
 	@GetMapping("/getCompNameWithDeptCount")
-	public ResponseEntity<Map<String,Integer>>  getCompNameWithDeptCount() {
-		Map<String,Integer> compNameWithDeptCount = companyService.getCompNameDeptCount();
+	public ResponseEntity<Map<String,Long>>  getCompNameWithDeptCount() {
+		//Map<String,Integer> compNameWithDeptCount = companyService.getCompNameDeptCount();
+		Map<String,Long> compNameWithDeptCount= companyService.getCompNameDeptCountJava8();
 		return new ResponseEntity<>(compNameWithDeptCount, HttpStatus.OK);
 	}
 	
