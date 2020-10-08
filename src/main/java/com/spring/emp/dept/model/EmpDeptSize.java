@@ -1,28 +1,14 @@
 package com.spring.emp.dept.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class EmpDeptSize {
-	
+
+	@Getter
+	@Setter
 	Integer empSize;
+	@Getter
+	@Setter
 	Integer deptSize;
-	
-	
-	public Integer getEmpSize() {
-		return empSize;
-	}
-
-
-	public void setEmpSize(Integer empSize) {
-		this.empSize = empSize;
-	}
-
-
-	public Integer getDeptSize() {
-		return deptSize;
-	}
-
-
-	public void setDeptSize(Integer deptSize) {
-		this.deptSize = deptSize;
-	}
-
 }

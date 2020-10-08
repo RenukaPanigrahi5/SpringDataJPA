@@ -21,6 +21,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 
+	/**
+	 * creating new employee
+	 * @param employee
+	 * @return created employee
+	 */
 	@Override
 	public Employee addEmployee(Employee employee) {
 		Department dept = departmentRepository.findById(employee.getDepartment().getId()).orElse(null);
@@ -40,23 +45,40 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRepository.deleteById(id);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public List<Employee> getAllEmployees() {
 		List<Employee> employees = employeeRepository.findAll();
 		return employees;
 	}
 
+	/**
+	 *
+	 * @param employeeId
+	 * @return
+	 */
 	@Override
 	public Employee getEmployee(Long employeeId) {
 		Employee emp = employeeRepository.findById(employeeId).orElse(null);
 		return emp;
 	}
 
+	/**
+	 *
+	 * @param employeeId
+	 */
 	@Override
 	public void deleteEmployee(Long employeeId) {
 		employeeRepository.deleteById(employeeId);
 	}
 
+	/**
+	 *
+	 * @param employee
+	 */
 	@Override
 	public void updateEmployee(Employee employee) {
 		employeeRepository.save(employee);

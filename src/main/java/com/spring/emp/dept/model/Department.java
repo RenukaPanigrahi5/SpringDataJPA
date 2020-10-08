@@ -14,67 +14,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Department")
+@Builder(toBuilder = true)
 public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Getter
+	@Setter
 	private Long id;
+	@Getter
+	@Setter
 	private String name;
 
+
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Setter
+	@Getter
 	private List<Employee> employees = new ArrayList<>();
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonBackReference
+	@Getter
+	@Setter
 	private Company company;
-	
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-
-	public Department(String name, Company company) {
-		super();
-		this.name = name;
-		this.company = company;
-	}
-
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
-
-	public Department() {
-		super();
-	}
-
-	public Department(String name) {
-		super();
-		this.name = name;
-	}
-
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
 }
