@@ -21,13 +21,21 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
 	private CompanyRepository companyRepository;
-	
+
+	/**
+	 * creating new company
+	 * @param company
+	 * @return created company
+	 */
 	@Override
 	public Company createNewCompany(Company company) {
-		companyRepository.save(company);
 		return companyRepository.save(company);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public List<Company> getAllCompanies() {
 		List<Company> listOfComp = companyRepository.findAll();
@@ -40,13 +48,17 @@ public class CompanyServiceImpl implements CompanyService {
 		return listOfComp;
 	}
 
+	/**
+	 *
+	 * @param compName
+	 * @return
+	 */
 	//Completed Java8 Method
 	@Override
 	public List<String> getDepNamesByCompName(String compName) {
-		
 		Company c = companyRepository.findByName(compName);
 		List<String> depNames = null;
-		if(null != c) {
+		if(Objects.nonNull(c)){
 			depNames = new ArrayList<String>();
 			List<Department> depList = c.getDep();
 			for (Department department : depList) {
@@ -56,6 +68,11 @@ public class CompanyServiceImpl implements CompanyService {
 		return depNames;
 	}
 
+	/**
+	 *
+	 * @param compName
+	 * @return
+	 */
 	@Override
 	public List<String> getDepNamesByCompNameJava8(String compName) {
 		Optional<Company> c = Optional.ofNullable(companyRepository.findByName(compName));
@@ -67,6 +84,11 @@ public class CompanyServiceImpl implements CompanyService {
 		return depNames;
 	}
 
+	/**
+	 *
+	 * @param compName
+	 * @return
+	 */
 	@Override
 	public Integer getDCountByCompName(String compName) {
 		Company companyName = companyRepository.findByName(compName);
@@ -74,6 +96,10 @@ public class CompanyServiceImpl implements CompanyService {
 		return count;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	//comp name with dept count
 	@Override
 	public Map<String, Integer> getCompNameDeptCount() {
@@ -86,6 +112,11 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return hm;
 	}
+
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public Map<String, Long> getCompNameDeptCountJava8() {
 		List<Company> compList = companyRepository.findAll();
@@ -93,6 +124,10 @@ public class CompanyServiceImpl implements CompanyService {
 				collect(Collectors.toMap(c->c.getName(),company->company.getDep().stream().count()));
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	//compName deptCount EmpCount as value
 	@Override
 	public Map<String, Map<String, Integer>> getCountingAll() {
@@ -114,13 +149,11 @@ public class CompanyServiceImpl implements CompanyService {
 		
 		return hm;
 	}
-	/*@Override
-	public Map<String, Map<String, Integer>> getCountingAllJava8(){
-		List<Company> compList = companyRepository.findAll();
-		compList.stream().collect(Collectors.toMap())
 
-	}*/
-
+	/**
+	 *
+	 * @return
+	 */
 	public Map<String,EmpDeptSize> getCountingAllSample() {
 		Map<String,EmpDeptSize> hm = new HashMap<>();
 		List<Company> compList = companyRepository.findAll();

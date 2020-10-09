@@ -11,8 +11,6 @@
 
 	<groupId>somecompany.com</groupId>
 
-
-
 	<artifactId>SpringBootJpaOneToMany</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringBootJpaOneToMany</name>
@@ -90,8 +88,14 @@
             <version>1.0.2</version>
             <scope>test</scope>
         </dependency>
-			
-	</dependencies>
+
+	<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
+</dependencies>
 	<build>
 		<plugins>
 			<plugin>

@@ -22,6 +22,13 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService deptService;
 
+	/**
+	 * create department
+	 * @param employeeList
+	 * @param deptName
+	 * @param company_name
+	 * @return created department
+	 */
 	@PostMapping("/createEmployeeByDept/{deptName}/{company_name}")
 	public ResponseEntity<Department> saveEmployeeDept(@RequestBody List<Employee> employeeList,
 			@PathVariable String deptName, @PathVariable String company_name) {
@@ -29,6 +36,11 @@ public class DepartmentController {
 		return new ResponseEntity<>(dept, HttpStatus.OK);
 	}
 
+	/**
+	 * Getting employee via department Id
+	 * @param deptId
+	 * @return employees
+	 */
 	@GetMapping("/getEmpsByDeptId")
 	public ResponseEntity<List<Employee>> getEmpsByDeptId(@RequestParam(name = "deptId") Long deptId) {
 		System.out.println(deptId);
@@ -36,6 +48,11 @@ public class DepartmentController {
 		return new ResponseEntity<>(empList, HttpStatus.OK);
 	}
 
+	/**
+	 *
+	 * @param deptName
+	 * @return
+	 */
 	@GetMapping("/getEmpsByDeptName")
 	public ResponseEntity<List<Employee>> getEmpsByDeptName(@RequestParam(name = "deptName") String deptName) {
 		List<Employee> empList = deptService.getEmpsByName(deptName);

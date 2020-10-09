@@ -9,13 +9,17 @@ import com.spring.emp.dept.model.Company;
 import com.spring.emp.dept.model.Department;
 import com.spring.emp.dept.model.Employee;
 
+/**
+ * Utility class to generate different types of json requests
+ * It is for testing purpose
+ */
 public class ConvertPojoToJSon {
 
 	public static void main(String[] args) {
-		Company c = new Company("amazon");
+		//Employee emp = Employee.builder().empName("Deendaya").salary(100).build();
 		List<Department> depList = new ArrayList<>();
-		
-		Department d =new Department("tys");
+		Company c = Company.builder().name("amazon").build();
+		Department d = Department.builder().name("tys").build();
 		Employee e1 = new Employee("dfg",d);
 		Employee e2 = new Employee("wer",d);
 		List<Employee> ie = new ArrayList<Employee>();
