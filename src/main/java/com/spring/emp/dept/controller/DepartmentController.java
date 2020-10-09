@@ -37,9 +37,9 @@ public class DepartmentController {
 	}
 
 	/**
-	 *
+	 * Getting employee via department Id
 	 * @param deptId
-	 * @return
+	 * @return employees
 	 */
 	@GetMapping("/getEmpsByDeptId")
 	public ResponseEntity<List<Employee>> getEmpsByDeptId(@RequestParam(name = "deptId") Long deptId) {

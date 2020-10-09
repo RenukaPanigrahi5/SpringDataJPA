@@ -39,8 +39,8 @@ public class CompanyController {
 	}
 
 	/**
-	 *
-	 * @return
+	 * List of all Companies
+	 * @return all companies
 	 */
 	@GetMapping("/getAllCompanies")
 	public ResponseEntity<List<Company>> getAllCompanies() {
@@ -49,15 +49,15 @@ public class CompanyController {
 	}
 
 	/**
-	 *
+	 * created deptnames via company wise
 	 * @param compName
-	 * @return
+	 * @return deptnames list
 	 */
 	@GetMapping("/getDepNamesByCompName")
 	public  ResponseEntity<?>  getDepNamesByCompName(@RequestParam(name = "compName") String compName) {
 		//List<String> depNamesList = companyService.getDepNamesByCompName(compName);
 		List<String> depNamesList = companyService.getDepNamesByCompNameJava8(compName);
-		if(null != depNamesList) {
+		if(!depNamesList.isEmpty()) {
 			return new ResponseEntity<>(depNamesList, HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Company Not Found", HttpStatus.NOT_FOUND);

@@ -1,9 +1,6 @@
 package com.spring.emp.dept.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,25 +20,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Company")
 @Builder(toBuilder = true)
+@Data
 public class Company {
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
-	@Getter
-	@Setter
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Company_Id")
-	@Getter
-	@Setter
 	private List<Department> dep = new ArrayList<>();
 
-
-	@Getter
-	@Setter
 	private String name;
 
 }

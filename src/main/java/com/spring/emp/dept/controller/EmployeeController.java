@@ -33,9 +33,9 @@ public class EmployeeController {
 	}
 
 	/**
-	 *
+	 * creating employees with given data
 	 * @param employee
-	 * @return
+	 * @return created employee
 	 */
 	@PostMapping("/employee")
 	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
@@ -44,9 +44,9 @@ public class EmployeeController {
 	}
 
 	/**
-	 *
+	 * getting employee by Id
 	 * @param employeeId
-	 * @return
+	 * @return employee
 	 */
 	@GetMapping("/empsById")
 	public ResponseEntity<Employee> getEmpsById(@RequestParam(name = "employeeId") Long employeeId) {

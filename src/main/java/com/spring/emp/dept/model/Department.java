@@ -15,33 +15,27 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "Department")
 @Builder(toBuilder = true)
+@Data
 public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Getter
-	@Setter
 	private Long id;
-	@Getter
-	@Setter
 	private String name;
 
 
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-	@Setter
-	@Getter
 	private List<Employee> employees = new ArrayList<>();
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonBackReference
-	@Getter
-	@Setter
 	private Company company;
 
 }
